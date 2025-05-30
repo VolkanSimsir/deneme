@@ -1,0 +1,25 @@
+name: Python Test Workflow
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Reposityoyu Klonla
+        uses: actions/checkout@v3
+
+      - name: Miniconda Kurulumu
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          environment-file: environment.yml
+          activate-environment: test-env
+
+      - name: Test Script'ini çalıştır
+        run: bash scripts/run_tests.sh
